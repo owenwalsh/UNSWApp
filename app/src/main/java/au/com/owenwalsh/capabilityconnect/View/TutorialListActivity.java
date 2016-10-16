@@ -15,6 +15,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import au.com.owenwalsh.capabilityconnect.Adapters.TutorialAdapter;
+import au.com.owenwalsh.capabilityconnect.Database.TutorialLogic;
+import au.com.owenwalsh.capabilityconnect.Model.Student;
+import au.com.owenwalsh.capabilityconnect.Model.Tutorial;
 import au.com.owenwalsh.capabilityconnect.R;
 
 import static au.com.owenwalsh.capabilityconnect.R.anim.actionbar_close;
@@ -22,7 +28,7 @@ import static au.com.owenwalsh.capabilityconnect.R.anim.actionbar_open;
 import static au.com.owenwalsh.capabilityconnect.R.anim.rotate_backward;
 import static au.com.owenwalsh.capabilityconnect.R.anim.rotate_forward;
 
-public class TutorialListActivity extends BaseActivity {
+public class TutorialListActivity extends BaseActivity implements View.OnClickListener, TutorialAdapter.ItemClickCallBack  {
 
     private RecyclerView recyclerView;
     private ProgressDialog progress;
@@ -31,6 +37,9 @@ public class TutorialListActivity extends BaseActivity {
     private FloatingActionButton addTutorialActionBar;
     private Animation actionbar_open,actionbar_close,rotate_forward,rotate_backward;
 
+    private TutorialLogic tutorialLogic;
+    private ArrayList<Tutorial> tutorials;
+    private TutorialAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +78,7 @@ public class TutorialListActivity extends BaseActivity {
     }
 
     private void initViews() {
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_student_list);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_tutorial_list);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -77,6 +86,11 @@ public class TutorialListActivity extends BaseActivity {
     }
 
     private void loadTutorials() {
+    tutorialLogic = new TutorialLogic(TutorialListActivity.this);
+    tutorials = tutorialLogic.findAllTutorials();
+        adapter = new TutorialAdapter(tutorials, TutorialListActivity.this);
+        recyclerView.setAdapter(adapter);
+        adapter.setItemClickCallback(this);
     }
 
     public void animateFAB(){
@@ -104,5 +118,10 @@ public class TutorialListActivity extends BaseActivity {
         addTutorialActionBar.setClickable(false);
         addTutorialActionBar.hide();
         addActionBar.hide();
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

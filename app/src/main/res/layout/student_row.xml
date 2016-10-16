@@ -28,7 +28,7 @@
             android:id="@+id/student_first_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/class_id"
+            android:layout_below="@id/student_id"
             android:padding="20dp" />
 
         <TextView
@@ -40,10 +40,10 @@
 
 
         <ImageButton
-            android:id="@+id/remove_button"
+            android:id="@+id/btn_add_assessment"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_toLeftOf="@+id/edit_button"
+            android:layout_toLeftOf="@+id/btn_add_competency"
             android:paddingRight="10dp"
             android:scaleType="fitXY"
             android:src="@drawable/assessment_icon"
@@ -51,7 +51,7 @@
             android:visibility="visible" />
 
         <ImageButton
-            android:id="@+id/edit_button"
+            android:id="@+id/btn_add_competency"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
