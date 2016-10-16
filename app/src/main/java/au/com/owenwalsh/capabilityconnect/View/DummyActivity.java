@@ -33,7 +33,7 @@ public class DummyActivity extends AppCompatActivity {
 
         firstName = (TextView) findViewById(R.id.student_first_name);
         Intent intent = getIntent();
-        final String name = intent.getStringExtra(StudentListFragment.FIRST_NAME);
+        final String name = intent.getStringExtra(StudentListActivity.FIRST_NAME);
         firstName.setText(name);
     }
 

@@ -29,7 +29,8 @@
         </activity>
         <activity android:name=".View.StudentListActivity" />
         <activity android:name=".View.BaseActivity" />
-        <activity android:name=".View.AddStudentActivity"></activity>
+        <activity android:name=".View.AddStudentActivity" />
+        <activity android:name=".View.TutorialListActivity"></activity>
     </application>
 
 </manifest>

@@ -60,11 +60,8 @@ public class BaseActivity extends AppCompatActivity {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.tutorial:
                         Toast.makeText(getApplicationContext(),"Tutorials Selected",Toast.LENGTH_SHORT).show();
-
-                        // StudentListFragment fragment = new StudentListFragment();
-                        //android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        // fragmentTransaction.replace(R.id.frame,fragment);
-                        // fragmentTransaction.commit();
+                        Intent tutorialIntent = new Intent(getApplicationContext(), TutorialListActivity.class);
+                        startActivity(tutorialIntent);
 
                         return true;
 
