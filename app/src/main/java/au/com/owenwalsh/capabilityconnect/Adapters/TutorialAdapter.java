@@ -22,19 +22,34 @@ public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.ViewHo
     private Context mContext;
     private List<Tutorial> classList;
 
+    private ItemClickCallback itemClickCallback;
+
+
+    //declaring interface for the on click event
+    public interface ItemClickCallback {
+        void onItemClick(int p);
+
+        void onDeleteClick(int p);
+
+        void onUpdateClick(int p);
+    }
+
+    public void setItemClickCallback(final ItemClickCallback itemClickCallback) {
+        this.itemClickCallback = itemClickCallback;
+    }
+
     /**
      * Constructor for Tutorial Adapter
      *
      * @param classList
      * @param mContext
      */
-    public TutorialAdapter (List<Tutorial> classList, Context mContext){
+    public TutorialAdapter(List<Tutorial> classList, Context mContext) {
         this.classList = classList;
         this.mContext = mContext;
     }
 
     /**
-     *
      * @param viewGroup
      * @param viewType
      * @return
@@ -46,38 +61,14 @@ public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.ViewHo
     }
 
     /**
-     *
      * @param viewHolder
      * @param position
      */
     @Override
     public void onBindViewHolder(TutorialAdapter.ViewHolder viewHolder, int position) {
-    viewHolder.classID.setText(classList.get(position).getId());
-        viewHolder.classLayout.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Log.d("Class Clicked: ","a class has been clicked");
-            //code for whatever happens when  class is clicked
-            }
-        });
-        viewHolder.assesmentButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Log.d("Assessment Clicked: ","assessment button has been clicked");
-                //code for whatever happens when  assessment image button is clicked
-            }
-        });
-
-        viewHolder.competencyButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Log.d("Competency Clicked: ","competency button has been clicked");
-                //code for whatever happens when  competency image button is clicked
-            }
-        });
+        viewHolder.tutorialDay.setText(classList.get(position).getDay());
+        viewHolder.tutorialTime.setText(classList.get(position).getTime());
+        viewHolder.numOfStudents.setText(String.valueOf(classList.get(position).getNumberOfStudents()));
     }
 
     public void updateListAdapter(List<Tutorial> classList) {
@@ -89,18 +80,38 @@ public class TutorialAdapter extends RecyclerView.Adapter<TutorialAdapter.ViewHo
         return classList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView classID;
-        public ImageButton assesmentButton;
-        public ImageButton competencyButton;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView tutorialDay;
+        public TextView tutorialTime;
+        public TextView numOfStudents;
+        public ImageButton removeButton;
+        public ImageButton updateButton;
         public RelativeLayout classLayout;
+        public View tutContainer;
 
         public ViewHolder(View view) {
             super(view);
-            classLayout = (RelativeLayout) view.findViewById(R.id.class_card);
-            classID = (TextView) view.findViewById(R.id.class_id);
-            assesmentButton = (ImageButton) view.findViewById(R.id.assessment_button);
-            competencyButton = (ImageButton) view.findViewById(R.id.competency_button);
+            classLayout = (RelativeLayout) view.findViewById(R.id.tutorial_card);
+            tutorialDay = (TextView) view.findViewById(R.id.tutorial_day);
+            tutorialTime = (TextView) view.findViewById(R.id.tutorial_time);
+            numOfStudents = (TextView) view.findViewById(R.id.num_of_students);
+            removeButton = (ImageButton) view.findViewById(R.id.btn_remove_tutorial);
+            updateButton = (ImageButton) view.findViewById(R.id.btn_edit_tutorial);
+            tutContainer = view.findViewById(R.id.tutorial_cont_item_root);
+            tutContainer.setOnClickListener(this);
+            updateButton.setOnClickListener(this);
+            removeButton.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == R.id.tutorial_cont_item_root) {
+                itemClickCallback.onItemClick(getAdapterPosition());
+            } else if (view.getId() == R.id.btn_edit_tutorial) {
+                itemClickCallback.onUpdateClick(getAdapterPosition());
+            } else if (view.getId() == R.id.btn_remove_tutorial) {
+                itemClickCallback.onDeleteClick(getAdapterPosition());
+            }
         }
     }
 }

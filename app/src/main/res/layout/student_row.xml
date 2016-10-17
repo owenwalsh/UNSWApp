@@ -40,24 +40,24 @@
 
 
         <ImageButton
-            android:id="@+id/btn_add_assessment"
+            android:id="@+id/remove_button"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_toLeftOf="@+id/btn_add_competency"
+            android:layout_toLeftOf="@+id/edit_button"
             android:paddingRight="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/assessment_icon"
+            android:src="@drawable/student_remove_icon"
             android:background="@android:color/transparent"
             android:visibility="visible" />
 
         <ImageButton
-            android:id="@+id/btn_add_competency"
+            android:id="@+id/edit_button"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
             android:paddingRight="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/competency_icon"
+            android:src="@drawable/student_edit_icon"
             android:background="@android:color/transparent"
             android:visibility="visible" />
     </RelativeLayout>

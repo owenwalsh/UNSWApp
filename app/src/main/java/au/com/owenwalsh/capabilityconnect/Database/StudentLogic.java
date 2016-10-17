@@ -51,11 +51,13 @@ public class StudentLogic {
         contentValues.put(dbHelper.EMAIL, student.getEmail());
         contentValues.put(dbHelper.WEAKNESS, student.getWeakness());
         contentValues.put(dbHelper.STRENGTH, student.getStrength());
+        open();
         long row = db.insert(dbHelper.STUDENTS_TABLE, null, contentValues);
+        close();
         return row;
     }
 
-    public void updateStudent(Student student) {
+    public long updateStudent(Student student) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(dbHelper.ZID, student.getId());
         contentValues.put(dbHelper.FIRST_NAME, student.getFirsName());
@@ -63,12 +65,15 @@ public class StudentLogic {
         contentValues.put(dbHelper.EMAIL, student.getEmail());
         contentValues.put(dbHelper.WEAKNESS, student.getWeakness());
         contentValues.put(dbHelper.STRENGTH, student.getStrength());
+        open();
         long row = db.update(dbHelper.STUDENTS_TABLE, contentValues, dbHelper.ZID + "=" + student.getId(), null);
-        Log.d("Student Updated ID is :", String.valueOf(row));
+        close();
+        return row;
     }
 
     public Student findStudentById(String zID) {
         student = new Student();
+        open();
         try {
             cursor = db.rawQuery("SELECT * FROM " + dbHelper.STUDENTS_TABLE + " WHERE " + dbHelper.ZID + "= '" + zID + "'", null);
             if (cursor != null) {
@@ -91,6 +96,7 @@ public class StudentLogic {
 
     public ArrayList<Student> findAllStudent() {
         students = new ArrayList<>();
+        open();
         try {
             cursor = db.rawQuery("SELECT * FROM " + dbHelper.STUDENTS_TABLE, null);
             while (cursor.moveToNext()) {
@@ -108,13 +114,13 @@ public class StudentLogic {
             Log.e(TAG, e.getMessage());
             students = null;
         }
-
         close();
         return students;
     }
 
     public ArrayList<Student> findStudentByClassId(int classId) {
         students = new ArrayList<>();
+        open();
         try {
             cursor = db.rawQuery("SELECT * FROM " + dbHelper.STUDENTS_TABLE + " JOIN "
                     + dbHelper.CLASS_WEEK_STUDENT + " ON "
@@ -139,7 +145,10 @@ public class StudentLogic {
         return students;
     }
 
-    public void deleteStudent(String zID) {
-        db.delete(dbHelper.STUDENTS_TABLE, dbHelper.ZID + "= '" + zID + "'", null);
+    public long deleteStudent(String zID) {
+        open();
+        long row = db.delete(dbHelper.STUDENTS_TABLE, dbHelper.ZID + "= '" + zID + "'", null);
+        close();
+        return row;
     }
 }

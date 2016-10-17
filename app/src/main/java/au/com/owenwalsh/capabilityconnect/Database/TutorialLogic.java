@@ -45,17 +45,19 @@ public class TutorialLogic {
         db.close();
     }
 
-    public void addTutorial(Tutorial tutorial) {
+    public long addTutorial(Tutorial tutorial) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(dbHelper.DAY, tutorial.getDay());
         contentValues.put(dbHelper.TIME, tutorial.getTime());
+        open();
         long row = db.insert(dbHelper.TUTORIALS, null, contentValues);
         close();
-        Log.d("Tutorial added :", String.valueOf(row));
+        return row;
     }
 
     public Tutorial findTutorialById(int id) {
         tutorial = new Tutorial();
+        open();
         try {
             cursor = db.rawQuery("SELECT * FROM " + dbHelper.TUTORIALS + " WHERE " + dbHelper.TUTORIAL_ID + " = " + id , null);
             if (cursor != null) {
@@ -76,12 +78,16 @@ public class TutorialLogic {
     //FIND ALL TUTORIALS
     public ArrayList<Tutorial> findAllTutorials() {
         tutorials = new ArrayList<>();
+        open();
         try {
             cursor = db.rawQuery("SELECT * FROM " + dbHelper.TUTORIALS, null);
+            int count = cursor.getCount();
             while (cursor.moveToNext()) {
                 tutorial = new Tutorial();
+                //tutorial.setNumberOfStudents(getStudentCount(cursor.getInt(0)));
                 tutorial.setDay(cursor.getString(1));
                 tutorial.setTime(cursor.getString(2));
+
                 tutorials.add(tutorial);
             }
             cursor.close();
@@ -89,8 +95,24 @@ public class TutorialLogic {
             Log.e(TAG, e.getMessage());
             tutorials = null;
         }
-
         close();
         return tutorials;
+    }
+
+    public int getStudentCount(int classId) {
+        int count = 0;
+        open();
+        try {
+            cursor = db.rawQuery("SELECT * FROM " + dbHelper.STUDENTS_TABLE + " JOIN "
+                    + dbHelper.CLASS_WEEK_STUDENT + " ON "
+                    + dbHelper.STUDENTS_TABLE + "." + dbHelper.ZID + " = " + dbHelper.CLASS_WEEK_STUDENT + "." + dbHelper.STUDENT_ID
+                    + " WHERE " + dbHelper.CLASS_WEEK_STUDENT + "." + dbHelper.TUTORIAL_ID + " = " + classId, null);
+            count  = cursor.getCount();
+            cursor.close();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+        close();
+        return count;
     }
 }

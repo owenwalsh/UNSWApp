@@ -28,14 +28,14 @@ import static au.com.owenwalsh.capabilityconnect.R.anim.actionbar_open;
 import static au.com.owenwalsh.capabilityconnect.R.anim.rotate_backward;
 import static au.com.owenwalsh.capabilityconnect.R.anim.rotate_forward;
 
-public class TutorialListActivity extends BaseActivity implements View.OnClickListener, TutorialAdapter.ItemClickCallBack  {
+public class TutorialListActivity extends BaseActivity implements View.OnClickListener, TutorialAdapter.ItemClickCallback {
 
     private RecyclerView recyclerView;
     private ProgressDialog progress;
     private Boolean isFabOpen = false;
     private FloatingActionButton addActionBar;
     private FloatingActionButton addTutorialActionBar;
-    private Animation actionbar_open,actionbar_close,rotate_forward,rotate_backward;
+    private Animation actionbar_open, actionbar_close, rotate_forward, rotate_backward;
 
     private TutorialLogic tutorialLogic;
     private ArrayList<Tutorial> tutorials;
@@ -49,7 +49,7 @@ public class TutorialListActivity extends BaseActivity implements View.OnClickLi
         View contentView = inflater.inflate(R.layout.activity_tutorial_list, null, false);
         drawerLayout.addView(contentView, 0);
 
-       // initViews();
+        initViews();
 
 
         addActionBar = (FloatingActionButton) findViewById(R.id.fab);
@@ -86,16 +86,16 @@ public class TutorialListActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void loadTutorials() {
-    tutorialLogic = new TutorialLogic(TutorialListActivity.this);
-    tutorials = tutorialLogic.findAllTutorials();
+        tutorialLogic = new TutorialLogic(TutorialListActivity.this);
+        tutorials = tutorialLogic.findAllTutorials();
         adapter = new TutorialAdapter(tutorials, TutorialListActivity.this);
         recyclerView.setAdapter(adapter);
         adapter.setItemClickCallback(this);
     }
 
-    public void animateFAB(){
+    public void animateFAB() {
 
-        if(isFabOpen){
+        if (isFabOpen) {
 
             addActionBar.startAnimation(rotate_backward);
             addTutorialActionBar.startAnimation(actionbar_close);
@@ -109,11 +109,12 @@ public class TutorialListActivity extends BaseActivity implements View.OnClickLi
             addTutorialActionBar.startAnimation(actionbar_open);
             addTutorialActionBar.setClickable(true);
             isFabOpen = true;
-            Log.d("Raj","open");
+            Log.d("Raj", "open");
 
         }
     }
-    public void hideFloatingActionBar(){
+
+    public void hideFloatingActionBar() {
         addTutorialActionBar.startAnimation(actionbar_close);
         addTutorialActionBar.setClickable(false);
         addTutorialActionBar.hide();
@@ -122,6 +123,21 @@ public class TutorialListActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onItemClick(int p) {
+
+    }
+
+    @Override
+    public void onDeleteClick(int p) {
+
+    }
+
+    @Override
+    public void onUpdateClick(int p) {
 
     }
 }

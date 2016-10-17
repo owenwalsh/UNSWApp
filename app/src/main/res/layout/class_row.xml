@@ -1,6 +1,6 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cont_item_root"
+    android:id="@+id/tutorial_cont_item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
@@ -17,18 +17,25 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <TextView
-            android:id="@+id/tutorial_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:paddingLeft="@dimen/activity_horizontal_margin" />
 
         <TextView
-            android:id="@+id/tutorial_name"
+            android:id="@+id/tutorial_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tutorial_id"
+            android:padding="20dp" />
+
+
+        <TextView
+            android:id="@+id/tutorial_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tutorial_day"
+            android:padding="20dp" />
+
+        <TextView
+            android:id="@+id/num_of_students"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="20dp" />
 
 
@@ -37,10 +44,10 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_toLeftOf="@+id/btn_remove_tutorial"
+            android:background="@android:color/transparent"
             android:paddingRight="10dp"
             android:scaleType="fitXY"
             android:src="@drawable/class_edit_icon"
-            android:background="@android:color/transparent"
             android:visibility="visible" />
 
         <ImageButton
@@ -48,10 +55,10 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"
             android:paddingRight="10dp"
             android:scaleType="fitXY"
             android:src="@drawable/class_remove_icon"
-            android:background="@android:color/transparent"
             android:visibility="visible" />
     </RelativeLayout>
 

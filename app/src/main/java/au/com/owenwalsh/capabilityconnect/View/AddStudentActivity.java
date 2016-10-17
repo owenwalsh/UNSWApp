@@ -39,8 +39,6 @@ public class AddStudentActivity extends BaseActivity {
         input_zID = (EditText) findViewById(R.id.input_zid);
         btn_addStudent = (Button) findViewById(R.id.btn_add_student);
 
-
-
         btn_addStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

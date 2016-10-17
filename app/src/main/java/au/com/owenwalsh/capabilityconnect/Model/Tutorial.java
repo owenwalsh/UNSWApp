@@ -7,18 +7,16 @@ public class Tutorial {
     private int id;
     private String day;
     private String time;
+    private int numberOfStudents;
 
     public Tutorial() {
     }
 
-    public Tutorial(int id, String day, String time) {
-        this.id = id;
+
+    public Tutorial(String day, String time, int numberOfStudents) {
         this.day = day;
         this.time = time;
-    }
-    public Tutorial(String day, String time) {
-        this.day = day;
-        this.time = time;
+        this.numberOfStudents  = numberOfStudents;
     }
 
     public int getId() {
@@ -43,5 +41,21 @@ public class Tutorial {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public Tutorial(int id, String day, String time, int numberOfStudents) {
+        this.id = id;
+        this.day = day;
+        this.time = time;
+        this.numberOfStudents = numberOfStudents;
+    }
+
+    public int getNumberOfStudents() {
+
+        return numberOfStudents;
+    }
+
+    public void setNumberOfStudents(int numberOfStudents) {
+        this.numberOfStudents = numberOfStudents;
     }
 }

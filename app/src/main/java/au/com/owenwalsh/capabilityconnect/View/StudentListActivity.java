@@ -2,12 +2,14 @@ package au.com.owenwalsh.capabilityconnect.View;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -129,6 +131,34 @@ public class StudentListActivity extends BaseActivity implements View.OnClickLis
         startActivity(intent);
         Log.d("Student Clicked is: ",student.getFirsName());
     }
+
+    @Override
+    public void onDeleteClick(int p) {
+        Student student = students.get(p);
+        studentLogic.deleteStudent(student.getId());
+        new AlertDialog.Builder(StudentListActivity.this)
+                .setTitle("Deleting " + student.getLastName())
+                .setMessage("Are you sure you want to delete " +student.getLastName())
+                .setIcon(R.drawable.warning)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Toast.makeText(StudentListActivity.this, "Student has been deleted ", Toast.LENGTH_SHORT).show();
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+
+    }
+    @Override
+    public void onUpdateClick(int p) {
+        Student student = students.get(p);
+        Intent intent = new Intent(this, DummyActivity.class);
+        intent.putExtra(FIRST_NAME, student.getFirsName());
+        startActivity(intent);
+    }
+
+
+
+
 
 
     /**

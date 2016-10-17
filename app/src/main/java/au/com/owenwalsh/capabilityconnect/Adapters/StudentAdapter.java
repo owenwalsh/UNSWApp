@@ -33,13 +33,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     //declaring interface for the on click event
     public interface ItemClickCallback {
         void onItemClick(int p);
+        void onDeleteClick(int p);
+        void onUpdateClick(int p);
     }
 
     public void setItemClickCallback(final ItemClickCallback itemClickCallback) {
         this.itemClickCallback = itemClickCallback;
     }
-
-
 
     /**
      * Constructor for Tutorial Adapter
@@ -79,7 +79,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         viewHolder.studentID.setText(studentList.get(position).getId());
         viewHolder.studentFirstName.setText(studentList.get(position).getFirsName());
         viewHolder.studentLastName.setText(studentList.get(position).getLastName());
-        viewHolder.studentLayout.setOnClickListener(new View.OnClickListener(){
+        /*viewHolder.studentLayout.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
@@ -102,7 +102,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                 Log.d("Remove Clicked: ","remove student button has been clicked");
                 //code for whatever happens when  class is clicked
             }
-        });
+        });*/
     }
 
     @Override
@@ -133,12 +133,19 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             editStudentButton = (ImageButton) view.findViewById(R.id.edit_button);
             container = view.findViewById(R.id.cont_item_root);
             container.setOnClickListener(this);
+            editStudentButton.setOnClickListener(this);
+            removeStudentButton.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (view.getId() == R.id.cont_item_root)
+            if (view.getId() == R.id.cont_item_root) {
                 itemClickCallback.onItemClick(getAdapterPosition());
+            }else if(view.getId() == R.id.edit_button) {
+                itemClickCallback.onUpdateClick(getAdapterPosition());
+            }else if(view.getId() == R.id.remove_button) {
+                itemClickCallback.onDeleteClick(getAdapterPosition());
+            }
         }
     }
 }
