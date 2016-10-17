@@ -23,6 +23,7 @@ public class AddStudentActivity extends BaseActivity {
     private EditText input_email;
     private EditText input_zID;
     private Button btn_addStudent;
+    private EditText input_stream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class AddStudentActivity extends BaseActivity {
         input_email = (EditText) findViewById(R.id.input_email);
         input_zID = (EditText) findViewById(R.id.input_zid);
         btn_addStudent = (Button) findViewById(R.id.btn_add_student);
+        input_stream = (EditText) findViewById(R.id.input_stream);
 
         btn_addStudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +61,8 @@ public class AddStudentActivity extends BaseActivity {
         String firstName = input_firstName.getText().toString();
         String lastName = input_lastName.getText().toString();
         String email = input_email.getText().toString();
-        student = new Student(zID, firstName,lastName, email);
+        String stream = input_stream.getText().toString();
+        student = new Student(zID, firstName,lastName, email, stream);
         studentLogic = new StudentLogic(AddStudentActivity.this);
         feedback = studentLogic.insertStudent(student);
         if(feedback > 0){

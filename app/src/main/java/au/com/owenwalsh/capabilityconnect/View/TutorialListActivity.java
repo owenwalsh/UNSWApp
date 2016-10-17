@@ -71,7 +71,7 @@ public class TutorialListActivity extends BaseActivity implements View.OnClickLi
                 Toast.makeText(TutorialListActivity.this, "Add student selected", Toast.LENGTH_SHORT).show();
                 Log.d("FAB FOCUSED:", "Add student selected");
                 //move user to AddStudentActivity
-                Intent intent = new Intent(getApplicationContext(), AddStudentActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddTutorialActivity.class);
                 startActivity(intent);
             }
         });

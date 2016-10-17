@@ -36,7 +36,8 @@
         <activity android:name=".View.CompetencyListActivity" />
         <activity android:name=".View.AddCompetencyActivity" />
         <activity android:name=".View.WeeksListActivity" />
-        <activity android:name=".View.AddWeekDetailsActivity"></activity>
+        <activity android:name=".View.AddWeekDetailsActivity" />
+        <activity android:name=".View.AddTutorialActivity"></activity>
     </application>
 
 </manifest>

@@ -15,11 +15,12 @@ public class Student {
     public Student() {
     }
 
-    public Student(String id, String firsName, String lastName, String email) {
+    public Student(String id, String firsName, String lastName, String email, String stream) {
         this.id = id;
         this.firsName = firsName;
         this.lastName = lastName;
         this.email = email;
+        this.stream = stream;
     }
 
     public Student(String id, String firsName, String lastName, String email, String weakness, String strength, String stream) {
